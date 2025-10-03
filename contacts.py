@@ -1,5 +1,4 @@
 import json
-from operator import contains
 
 FILENAME = "contacts.json"
 
@@ -23,15 +22,7 @@ def add(contacts):
     save(contacts)
     print(f"{name} を保存しました。")
 
-def find(contacts):
-    find_name = input("名前を検索して下さい: ")
-    find_number = contacts.get(find_name)
-    if find_number:
-        print(f"{find_name}の数字: {find_number}")
-    else:
-        print("見つかりませんでした。")
-
-def list(contacts):
+def list_contacts(contacts):
     if not contacts:
         print("空です。")
     else:

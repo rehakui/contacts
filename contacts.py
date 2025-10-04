@@ -37,18 +37,35 @@ def find(contacts):
     else:
         print("見つかりませんでした。")
 
+def delete_contacts(contacts):
+    delete_name = str(input("削除する名前: "))
+    if delete_name in contacts:
+        confirm = str(input(f"{delete_name} を本当に削除しますか? (y/n): ")).lower()
+        if confirm == "y":
+            del contacts[delete_name]
+            save(contacts)
+            print(f"{delete_name} を削除しました。")
+        elif confirm == "n":
+            print("キャンセルしました。")
+            return
+    else:
+        print("名前が見つかりません。")
+    save(contacts)
+
 def main():
     contacts = load()
     while True:
-        user_prompt = str(input("add/find/list/find?: "))
+        user_prompt = str(input("add/find/list/find/delete?: "))
         if user_prompt == "add":
             add(contacts)
         elif user_prompt == "find":
             find(contacts)
         elif user_prompt == "list":
-            list(contacts)
+            list_contacts(contacts)
         elif user_prompt == "find":
             find(contacts)
+        elif user_prompt == "delete":
+            delete_contacts(contacts)
         elif user_prompt == "end":
             break
 

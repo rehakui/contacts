@@ -29,6 +29,22 @@ def list_contacts(contacts):
         for nam, num in contacts.items():
             print(f"{nam}: {num}")
 
+def search(contacts):
+    q = input("検索キーワード: ").lower()
+    if not q:
+        print("検索キーワードは空です。")
+        return []
+    matches = [name for name in contacts.keys() if q in name.lower()]
+    if not matches:
+        print("ヒットしませんでした。")
+    else:
+        print(f"{len(matches)} 件ヒットしました: ")
+        for i, name in enumerate(matches, start=1):
+            print(f"{i}. {name}: {contacts[name]}")
+    return matches
+    # TODO: ここのreturnも返す意味を後で確認
+
+
 def find(contacts):
     find_name = str(input("検索する名前: "))
     find_number = contacts.get(find_name)
@@ -55,11 +71,13 @@ def delete_contacts(contacts):
 def main():
     contacts = load()
     while True:
-        user_prompt = str(input("add/find/list/find/delete?: "))
+        user_prompt = str(input("add/ find/ search/ list/ find/ delete?: "))
         if user_prompt == "add":
             add(contacts)
         elif user_prompt == "find":
             find(contacts)
+        elif user_prompt == "search":
+            search(contacts)
         elif user_prompt == "list":
             list_contacts(contacts)
         elif user_prompt == "find":
